@@ -69,9 +69,9 @@ pipeline {
         stage('Docker Push') {
             steps {
                 sh '''
-                    echo "$DOCKER_PASS" |
-                      docker login \
-                        -u "$DOCKERHUB_USER" \
+                    echo "$DOCKER_PASS_PSW" |
+                    docker login \
+                        -u "$DOCKER_PASS_USR" \
                         --password-stdin
 
                     docker push $MOVIE_IMAGE:$IMAGE_TAG

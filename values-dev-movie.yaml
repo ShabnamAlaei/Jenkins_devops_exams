@@ -1,0 +1,34 @@
+replicaCount: 1
+
+image:
+  repository: shabbyalaei/movie-service
+  pullPolicy: IfNotPresent
+  tag: "v1"
+
+imagePullSecrets: []
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 8000
+  nodePort: 30101
+
+probes:
+  enabled: true
+  path: /api/v1/movies/docs
+
+env:
+  - name: DATABASE_URI
+    value: postgresql://movie_db_username:movie_db_password@movie-db:5432/movie_db
+  - name: CAST_SERVICE_HOST_URL
+    value: http://cast-service-fastapiapp:80/api/v1/casts/
+
+command:
+  - uvicorn
+
+args:
+  - app.main:app
+  - --host
+  - 0.0.0.0
+  - --port
+  - "8000"    

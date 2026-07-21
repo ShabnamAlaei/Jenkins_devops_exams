@@ -10,8 +10,7 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
-imagePullSecrets: 
-  - name: "regcred"
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
@@ -83,3 +82,12 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+env: []
+
+probes:
+  enabled: true
+  path: /
+
+command: []
+args: []  

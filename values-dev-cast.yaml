@@ -1,0 +1,32 @@
+replicaCount: 1
+
+image:
+  repository: shabbyalaei/cast-service
+  pullPolicy: IfNotPresent
+  tag: "v1"
+
+imagePullSecrets: []
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 8000
+  nodePort: 30102
+
+probes:
+  enabled: true
+  path: /api/v1/casts/docs
+
+env:
+  - name: DATABASE_URI
+    value: postgresql://cast_db_username:cast_db_password@cast-db:5432/cast_db
+
+command:
+  - uvicorn
+
+args:
+  - app.main:app
+  - --host
+  - 0.0.0.0
+  - --port
+  - "8000"    

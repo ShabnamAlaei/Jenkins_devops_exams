@@ -2,3 +2,10 @@ env
 __pycache__
 .vscode
 .idea
+.kube/
+values-qa-movie.yaml
+values-qa-cast.yaml
+values-staging-movie.yaml
+values-staging-cast.yaml
+values-prod-movie.yaml
+values-prod-cast.yaml

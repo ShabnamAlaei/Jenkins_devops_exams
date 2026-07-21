@@ -194,11 +194,10 @@ def deployEnvironment(
           --namespace ${namespace} \
           --timeout=120s
 
-        cp values-dev-movie.yaml \
-          values-${namespace}-movie.yaml
-
-        cp values-dev-cast.yaml \
-          values-${namespace}-cast.yaml
+        if [ "${namespace}" != "dev" ]; then
+            cp values-dev-movie.yaml values-${namespace}-movie.yaml
+            cp values-dev-cast.yaml values-${namespace}-cast.yaml
+        fi
 
         sed -i \
           's|tag: "v1"|tag: "'"\$IMAGE_TAG"'"|' \

@@ -17,6 +17,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
+                echo "GIT_BRANCH=${env.GIT_BRANCH}"
             }
         }
 
@@ -133,7 +134,10 @@ pipeline {
 
         stage('Deploy Production') {
             when {
-                branch 'master'
+                expression {
+                    env.GIT_BRANCH == 'origin/master' ||
+                    env.GIT_BRANCH == 'master'
+                }
             }
 
             steps {
